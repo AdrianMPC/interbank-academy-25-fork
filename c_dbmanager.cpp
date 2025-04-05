@@ -42,7 +42,7 @@ bool DBManager::loadData() {
     for (const auto& fila : m_csvReader.getData()) {
         s_interbank_data* dato = m_parseRow(fila);
         if (dato) {
-            m_genReporte.evaluar_data(dato);
+            m_genReporte.evaluar_data(dato); // LOGICA PRINCIPAL DEL PROBLEMA
             m_hashTable.insertDataChunk(dato);
         } else {
             std::cout << "No se pudo interpretar la fila!\n";

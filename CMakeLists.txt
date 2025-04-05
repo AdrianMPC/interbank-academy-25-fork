@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(InterbankHashCSV)
+project(interbank-academy-25-fork)
 
 set(CMAKE_CXX_STANDARD 17)
 
