@@ -1,12 +1,22 @@
 #include "./c_dbmanager.h"
 
-
 #include <iostream>
 #include <cstring>
+
+/*  DBManager
+    Clase encargada de conectar las demas capas con el fin de encapsular los procesos y dejarlos fuera del main
+*/
 
 DBManager::DBManager(const std::string& p_archivoCSV, char p_delimitador, size_t p_hashSize)
 : m_csvReader(p_archivoCSV, p_delimitador), m_hashTable(p_hashSize), m_genReporte() {}
   
+/* DBManager::m_parseRow
+-  Responsable de parsear la linea, separar los datos, convertir a formato deseado, 
+-  crear objeto s_interbank_data* y ingresar los datos a este
+-  ARGS: fila - referencia de solo lectura a entrada de vector 
+-  RETORNA: PUNTERO A NUEVA ENTRADA s_interbank_data
+*/
+
 s_interbank_data* DBManager::m_parseRow(const std::vector<std::string>& fila) {
     if (fila.size() < 3) return nullptr;
 
@@ -22,6 +32,11 @@ s_interbank_data* DBManager::m_parseRow(const std::vector<std::string>& fila) {
     return data;
 }
 
+/* loadData
+-  Responsable de iterar sobre el array de los datos, separar estos datos, evaluar la data para el reporte final y crear un struct para ingresarlo en el hashtable.
+-  Responsable de imprimir en caso de error
+-  RETORNA: BOOL
+*/
 bool DBManager::loadData() {
     if (!m_csvReader.read()) { std::cout << "No se pudo leer el archivo\n"; return false;}
     for (const auto& fila : m_csvReader.getData()) {
@@ -37,9 +52,19 @@ bool DBManager::loadData() {
     return true;
 }
 
+
+/*  DBManager::genReporte
+    Llama a capa reporte para imprimir reporte final
+*/
 void DBManager::genReporte(){
     m_genReporte.generar_reporte();
 }
+
+/*  DBManager::searchID
+    Llamar a la capa reporte para imprimir
+    LLamar a la capa hashtable para buscar
+    ARGS: id de transaccion a buscar
+*/
 void DBManager::searchID(unsigned long id) {
     s_interbank_data* data = m_hashTable.searchData(id);
     if(data){

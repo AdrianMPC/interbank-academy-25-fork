@@ -8,6 +8,12 @@
 #include <fstream>
 #include <cstddef>
 
+/*  CuckooHashing
+    Impleentacion de una sola tabla de la estructura de dato cuckoo-hashing
+    Esto no permite una velocidad de busqueda de datos, lectura, y eliminacion de estos: constante O(1), no importa cuantos datos ingresemos la velocidad será la misma
+    La insercion tiene una complejidad en el peor de los casos de o(n), esto debido a que el peor caso requiera rehashear toda la tabla con el fin de resolver colisiones
+*/
+
 class CuckooHashing {
     private:
         std::vector<s_interbank_data*> m_tabla;

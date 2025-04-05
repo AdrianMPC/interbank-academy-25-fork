@@ -14,6 +14,10 @@ std::vector<std::vector<std::string>> CSVreader::getData() const
     return m_data;
 }
 
+/* read()
+    Seb encarga de leer linea por linea el CSV y guardar dicha linea en un vector
+    Ignora la primera fila siempre
+*/
 bool CSVreader::read()
 {
     std::ifstream file(m_narchivo);
@@ -32,6 +36,10 @@ bool CSVreader::read()
     return true;
 }
 
+/* m_split()
+    Se para las lineas y devuelve un vector de tokens
+    ARGS: line: linea a separar; delimiter: puede ser ; o , o lo que sea
+*/
 std::vector<std::string> CSVreader::m_split(const std::string& line, char delimiter) {
     std::vector<std::string> tokens;
     std::stringstream ss(line);
@@ -44,6 +52,9 @@ std::vector<std::string> CSVreader::m_split(const std::string& line, char delimi
     return tokens;
 }
 
+/* clearData()
+    Libera el vector luego de pasarlo al hashtable, no hay necesidad de mantenerlo en memoria
+*/
 void CSVreader::clearData(){
     m_data.clear();                 
     m_data.shrink_to_fit();        

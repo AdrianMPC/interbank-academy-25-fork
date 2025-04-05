@@ -17,7 +17,9 @@ int main(){
     std::getline(std::cin, input);
 
     DBManager o_dbmanager(input,',');
+    // CARGA LA DATA DEL CSV
     o_dbmanager.loadData();
+    // IMPRIME LOS RESULTADOS
     o_dbmanager.genReporte();
 
     std::cout << "Presiona cualquier tecla para ir al menu de API... ";

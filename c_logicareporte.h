@@ -3,6 +3,9 @@
 
 #include "./s_data.h"
 
+/*  LogicaNegocio
+    Clase encargada de definir como se imprimen los reportes
+*/
 class LogicaNegocio{
     private:
         double m_balance_final;

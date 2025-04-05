@@ -3,7 +3,9 @@
 
 #include <string>
 #include <vector>
-
+/* CSVreader
+    Lector de CSV adaptado al caso
+*/
 class CSVreader {
     private:
         std::string m_narchivo;

@@ -9,6 +9,9 @@
 #include <iostream>
 #include <cstring>
 
+/*  DBManager
+    Clase encargada de conectar las demas capas con el fin de encapsular los procesos y dejarlos fuera del main
+*/
 class DBManager {
     private:
         CSVreader m_csvReader;

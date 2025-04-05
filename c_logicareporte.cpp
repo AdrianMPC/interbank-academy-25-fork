@@ -11,6 +11,14 @@ LogicaNegocio::LogicaNegocio()
     m_conteo_debito= 0;
 }
 
+/*  LogicaNegocio::evaluar_data
+    LOGICA PRINCIPAL DEL PROBLEMA:
+-   Si nuestra transaccion es de tipo credito, no debería afectar nuestro balance, pero como nuestro balance final es 0 al inicio, sumamos el monto para el reporte
+-   Si nuestra transaccion es tipo debito, afecta a nuestro balance, debido a eso restamos el balance final
+-   Tenemos 2 variables de conteo, uno para credito y otro para debido. Se aumenta un contador depiendo la condicionales definidas en el programa
+-   Para mantener track del monto mayor, comparamos con el monto_mayor anterior, si este monto mayor es mayor al antiguo: actualizamos la variable global
+-   Grabamos la id para facilidad nuestra a la hora de imprimir el reporte (tambien solo podriamos grabar la id y compara haciendo una consulta pero resulta a nuestro hash table)
+*/
 void LogicaNegocio::evaluar_data(s_interbank_data* data){
     if(std::strcmp(data->tipo_transaccion, "Crédito") == 0){
         m_conteo_credito++;

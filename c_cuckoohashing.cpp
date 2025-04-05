@@ -9,6 +9,7 @@ CuckooHashing::CuckooHashing(size_t sizeTabla) : m_sizeTabla(sizeTabla)
     m_tabla.resize(sizeTabla, nullptr);
 }
 
+// Para liberar memoria despues de uso
 CuckooHashing::~CuckooHashing(){
     for (auto& ptr : m_tabla) {
         if (ptr != nullptr) {
@@ -19,11 +20,17 @@ CuckooHashing::~CuckooHashing(){
     m_tabla.clear();
 }
 
+/*  CuckooHashing::m_firstHash
+    Primer hash en referente a una ID
+*/
 unsigned long CuckooHashing::m_firstHash(unsigned long id)
 {
     return hashFunction(id, m_sizeTabla);
 }
 
+/*  CuckooHashing::m_firstHash
+    Segundo hash en referente a una ID multiplicado por un numero magico
+*/
 unsigned long CuckooHashing::m_secondHash(unsigned long id)
 {
     return hashFunction(id * 37, m_sizeTabla); 
@@ -34,6 +41,13 @@ size_t CuckooHashing::getSize()
     return this->m_sizeTabla;
 }
 
+/* CuckooHashing::m_rehash
+    Logica: Si estamos aca, es que el primer hash encontro una colision y necesitamos intercambiar el nuevo objetivo con el viejo objeto
+    Este viejo objeto es hash 2 veces, la primera lo hashea con m_firstHash y ve si el espacio en tabla esta ocupado, dado el caso
+    hasheamos con el m_secondHash, y luego insertamos, si eso falla, intercambiamos con el objeto que esta en la pos2 del vector y empezamos de nuevo
+    hasta que hallamos intentado el numero del tamño del vector
+    rehasheamos toda la tabla
+*/
 void CuckooHashing::m_rehash(s_interbank_data* data, unsigned long pos)
 {
     uint32_t loopCount = 0;
@@ -59,7 +73,9 @@ void CuckooHashing::m_rehash(s_interbank_data* data, unsigned long pos)
     m_rehashAll();
     insertDataChunk(data);
 }
-
+/*  CuckooHashing::m_rehashAll()
+    Aumentamos el tamaño de la tabla al doble; luego hasheamos todos los elementos de nuevo
+*/
 void CuckooHashing::m_rehashAll()
 {
     std::vector<s_interbank_data*> oldTable = m_tabla;
@@ -77,6 +93,11 @@ void CuckooHashing::m_rehashAll()
     oldTable.resize(0);
 }
 
+/*  CuckooHashing::insertDataChunk()
+-   Proceso principal de insercion
+    Si el objecto ya tiene un ID, lo descartamos; Si la posicion despues de hashear el id esta ocupado, hacemos un swap e intetamos de nuevo con el oldkey, pero esta vez intetamos 2 veces
+    Este proceso se realiza con el fin de evitar colisiones de hash.
+*/
 bool CuckooHashing::insertDataChunk(s_interbank_data* data)
 {
     s_interbank_data* check = searchData(data->id);
@@ -112,6 +133,11 @@ bool CuckooHashing::insertDataChunk(s_interbank_data* data)
     return true;
 }
 
+/*  CuckooHashing::insertDataChunk()
+-  Busqueda constante O(1)
+    - Hasheamos el id con el primer hash, si es null, hasheamos con el segundo hash, si es null; el objeto no existe
+    - Los hash devuelven la posicion a usar en el vector
+*/
 s_interbank_data* CuckooHashing::searchData(unsigned long id)
 {
     int pos1 = m_firstHash(id);
@@ -129,6 +155,10 @@ s_interbank_data* CuckooHashing::searchData(unsigned long id)
     return nullptr;
 }
 
+/*  CuckooHashing::deleteDataChunk()
+    - Busca si existe primero
+    - Busca en las 2 posiciones, si existe en uno de ellas, lo convierte a nullptr
+*/
 bool CuckooHashing::deleteDataChunk(unsigned long id)
 {
     s_interbank_data* data = searchData(id);
