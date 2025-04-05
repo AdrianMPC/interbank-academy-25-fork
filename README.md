@@ -17,10 +17,22 @@ La lógica para resolver el problema principal se encuentra en el archivo
 c_logicareporte.cpp
 ```
 ## Instrucciones de Ejecución
-
-### Instalación de Dependencias
-
-1. Clona este repositorio en tu máquina local:
+1. Clona este repositorio:
    ```bash
    git clone https://github.com/usuario/repositorio.git
     ```
+2. Instala CMAKE:
+3. Abrelo en Visual Studio Code (o configura el compilador de manera manual si desean hacerlo mediante consola)
+4. Si tienes la extensión de cmake en VSCODE, puedes ejecutar el BUILD y RUN de manera integrada. Caso contrario ejecuta los siguientes comandos:
+ ```bash
+   mkdir build
+   cd build
+   cmake ..
+   cmake --build .
+   .\interbank_app
+ ```
+5. Ya en el programa, ingresa la dirección donde se encuentra el archivo
+### Instalación de Dependencias
+1. Necesitas CMAKE (https://cmake.org/download/)
+2. VSCODE recomendado (https://code.visualstudio.com/)
+3. Necesitas un compilador de C++ que soporte C++17 (aquí hay uno de g++: https://winlibs.com/)(añade su carpeta bin a las variables de entorno para que funcione)
