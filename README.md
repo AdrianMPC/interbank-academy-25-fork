@@ -3,7 +3,7 @@
 
 ## Introducción
 
-Este proyecto tiene como propósito [resolver el problema propuesto en Codeable provisioanando una buena arquitectura de software].
+Este proyecto tiene como propósito resolver el problema propuesto en Codeable provisioanando una buena arquitectura de software.
 Se pidió leer un CSV y devolver un reporte final detallando detalles de esta manera:
 ```bash
 Reporte de Transacciones
@@ -17,6 +17,7 @@ La lógica para resolver el problema principal se encuentra en el archivo
 ```bash
 c_logicareporte.cpp
 ```
+El propósito fue evaluar si tenemos las capacidades para implementar sistemas simples y resolver problemas referente a bancas de manera eficaz.
 ## Instrucciones de Ejecución
 1. Clona este repositorio:
    ```bash
