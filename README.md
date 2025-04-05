@@ -1,4 +1,5 @@
 # Proyecto INTERBANK-ACADEMY-25-FORK
+## EN CASO EL PROGRAMA NO LEE EL CSV, CODIFICARLO EN UTF-8
 
 ## Introducción
 
@@ -19,7 +20,7 @@ c_logicareporte.cpp
 ## Instrucciones de Ejecución
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/usuario/repositorio.git
+   git clone https://github.com/AdrianMPC/interbank-academy-25-fork.git
     ```
 2. Instala CMAKE:
 3. Abrelo en Visual Studio Code (o configura el compilador de manera manual si desean hacerlo mediante consola)
@@ -72,3 +73,8 @@ Proyecto/
 ├── c_logicareporte.cpp
 ├── c_logicareporte.h
 ```
+Donde:
+- CSVreader tiene la logica del lector de CSV
+- CuckooHashing tiene la logica de la tabla hash basada en cuckoohashing
+- DBManager conecta tanto CSVreader,CuckooHashing y LogicaReporte y define las funciones del proceso principal, de esta manera. Main no tiene acceso a esta funciones criticas del programa directamente.
+- LogicaReporte es donde se evalua la lógica principal del problema y se implementa la solución principal. Tambien se define como se imprimen los reportes.
