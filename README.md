@@ -37,7 +37,7 @@ El propósito fue evaluar si tenemos las capacidades para implementar sistemas s
 ### Instalación de Dependencias
 1. Necesitas CMAKE (https://cmake.org/download/)
 2. VSCODE recomendado (https://code.visualstudio.com/)
-3. Necesitas un compilador de C++ que soporte C++17 (aquí hay uno de g++: https://winlibs.com/)(añade su carpeta bin a las variables de entorno para que funcione)
+3. Necesitas un compilador de C++ que soporte C++17 ( aquí hay uno de g++: https://winlibs.com/ ) (añade su carpeta bin a las variables de entorno para que funcione)
 
 ## Enfoque y Solución
 
